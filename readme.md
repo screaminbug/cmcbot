@@ -37,11 +37,13 @@ CREATE TABLE IF NOT EXISTS `cmcbot`.`markets` (
   `updated` TIMESTAMP(6) NULL DEFAULT NULL,
   PRIMARY KEY (`guid`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;```
+DEFAULT CHARACTER SET = utf8;
+```
 
 Create a cmcbot user and give it access to the database
 
 Run scrapy from project directory:
+
 ```
 scrapy crawl markets
 ```
