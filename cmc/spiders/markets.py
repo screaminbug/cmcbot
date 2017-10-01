@@ -13,15 +13,15 @@ class MarketsSpider(scrapy.Spider):
             url = response.urljoin(url)
             yield scrapy.Request(url=url, callback=self.parse_markets);
         
- #       try:
- #           next_page_index = response.css('div.pull-right > ul > li > a::text').extract().index('Next 100  ' + unichr(0x2192))
- #           pagination_urls = response.css('div.pull-right > ul > li > a::attr(href)').extract()
- #           next_page_url = pagination_urls[next_page_index]            
- #           if next_page_url:
- #               next_page_url = response.urljoin(next_page_url)
- #               yield scrapy.Request(url=next_page_url, callback=self.parse)
- #       except:
- #           print("No more pages");
+        try:
+            next_page_index = response.css('div.pull-right > ul > li > a::text').extract().index('Next 100  ' + unichr(0x2192))
+            pagination_urls = response.css('div.pull-right > ul > li > a::attr(href)').extract()
+            next_page_url = pagination_urls[next_page_index]            
+            if next_page_url:
+                next_page_url = response.urljoin(next_page_url)
+                yield scrapy.Request(url=next_page_url, callback=self.parse)
+        except:
+            print("No more pages");
     
     def parse_markets(self, response):
         markets = response.xpath('//table[@id="markets-table"]/tbody/tr')
